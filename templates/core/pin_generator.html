@@ -1,0 +1,79 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<div class="row">
+
+    <!-- LEFT INFO -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4>🔢 Secure PIN Generator</h4>
+
+            <p>
+                This tool generates random secure numeric PIN codes
+                for ATM, OTP or security verification.
+            </p>
+
+            <h5>Steps:</h5>
+            <ol>
+                <li>Select number of digits</li>
+                <li>Click Generate</li>
+                <li>Copy PIN</li>
+            </ol>
+
+            <h5>Output:</h5>
+            Random numeric PIN
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT TOOL -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4 class="mb-3">🛠 Tool Use</h4>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <select name="length" class="form-control mb-3">
+                    <option value="4">4 Digit</option>
+                    <option value="5">5 Digit</option>
+                    <option value="6">6 Digit</option>
+                    <option value="8">8 Digit</option>
+                </select>
+
+                <button class="btn btn-primary w-100 mb-2">
+                    Generate PIN
+                </button>
+            </form>
+
+
+            {% if result %}
+                <div class="alert alert-success text-center mt-3 fs-4">
+                    {{ result }}
+                </div>
+            {% endif %}
+
+
+            <div class="d-flex gap-2 mt-2">
+
+                <a href="" class="btn btn-secondary btn-sm flex-fill">Reset</a>
+
+                <a href="/tools/" class="btn btn-outline-dark btn-sm flex-fill">← Back</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

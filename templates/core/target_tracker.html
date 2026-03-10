@@ -1,0 +1,208 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* container */
+.tracker-container{
+
+width:900px;
+margin:auto;
+background:#0f172a;
+color:#00ff9f;
+font-family:monospace;
+border-radius:12px;
+overflow:hidden;
+
+}
+
+/* top bar */
+.bar{
+
+background:#202020;
+padding:10px;
+
+}
+
+/* grid */
+.grid{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:10px;
+
+}
+
+/* panel */
+.panel{
+
+background:black;
+padding:10px;
+border:1px solid #00ff9f;
+height:200px;
+overflow:auto;
+
+}
+
+/* title */
+.title{
+
+border-bottom:1px solid #00ff9f;
+margin-bottom:5px;
+
+}
+
+</style>
+
+
+
+<div class="tracker-container">
+
+<div class="bar">
+Target Surveillance Dashboard
+</div>
+
+
+<div class="grid">
+
+<!-- profile -->
+<div class="panel">
+
+<div class="title">
+Target Profile
+</div>
+
+Name: John Doe<br>
+Status: Active<br>
+Location: Unknown<br>
+
+</div>
+
+
+<!-- transactions -->
+<div class="panel"
+id="transactions">
+
+<div class="title">
+Financial Transactions
+</div>
+
+</div>
+
+
+<!-- activity -->
+<div class="panel"
+id="activity">
+
+<div class="title">
+Activity Logs
+</div>
+
+</div>
+
+
+<!-- messages -->
+<div class="panel"
+id="messages">
+
+<div class="title">
+Message Monitoring
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<button onclick="startTracking()"
+class="btn btn-success">
+
+Start Tracking
+
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+
+Back
+
+</a>
+
+</div>
+
+
+
+<script>
+
+/* fake logs */
+
+let transactions=[
+
+"$250 transferred",
+"$100 payment",
+"$500 withdrawal",
+"$80 online purchase"
+
+];
+
+let activity=[
+
+"Login detected",
+"File accessed",
+"Location ping",
+"Network activity"
+
+];
+
+let messages=[
+
+"Message sent",
+"Encrypted message",
+"Contact accessed",
+"New communication"
+
+];
+
+
+function startTracking(){
+
+setInterval(function(){
+
+addLog("transactions",
+transactions);
+
+addLog("activity",
+activity);
+
+addLog("messages",
+messages);
+
+},2000);
+
+}
+
+
+function addLog(id,data){
+
+let panel=
+document.getElementById(id);
+
+let msg=
+data[Math.floor(Math.random()*data.length)];
+
+panel.innerHTML+=
+"<br>"+msg;
+
+panel.scrollTop=
+panel.scrollHeight;
+
+}
+
+</script>
+
+{% endblock %}

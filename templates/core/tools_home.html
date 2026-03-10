@@ -1,0 +1,246 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<style>
+
+.main-title{
+    text-align:center;
+    margin-bottom:50px;
+    font-weight:700;
+}
+
+/* title spacing */
+.cat-title{
+    text-align:center;
+    font-weight:600;
+    margin-top:70px;   /* big space above */
+    margin-bottom:30px; /* space below */
+}
+
+/* section gap */
+.section-gap{
+    margin-bottom:80px;
+}
+
+
+/* same size card */
+.tool-card{
+    height:110px;
+    border-radius:12px;
+    background:white;
+    color:black;
+    box-shadow:0 0 10px rgba(0,0,0,0.15);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+/* full width button */
+.tool-btn{
+    width:100%;
+    font-size:13px;
+}
+
+
+
+</style>
+
+
+
+<!-- MAIN TITLE -->
+<h2 class="main-title">🛠 Cyber Security Toolkit</h2>
+
+
+
+<!-- CATEGORY 1 -->
+<h4 class="cat-title">🔐 Password Tools</h4>
+
+<div class="row row-cols-5 g-4 text-center section-gap">
+
+
+    <div class="col">
+        <div class="card tool-card p-3">
+            Password Strength Checker
+            <a href="/tools/password-checker/" class="btn btn-primary tool-btn mt-2">Open</a>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card p-3">
+            Random Password Generator
+            <a href="/tools/password-generator/" class="btn btn-primary tool-btn mt-2">Open</a>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card p-3">
+            Password Hash Generator
+            <a href="/tools/hash-generator/" class="btn btn-primary tool-btn mt-2">Open</a>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card p-3">
+            Password Leak Checker
+            <a href="/tools/password-leak-checker/" class="btn btn-primary tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card p-3">
+            Secure PIN Generator
+            <a href="/tools/pin-generator/" class="btn btn-primary tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- ================= CATEGORY 2 ================= -->
+
+<style>
+    /* Cyber Security theme cards */
+.tool-card-sec{
+    height:110px;
+    border-radius:12px;
+    background:#e8f5e9;
+    color:#0f5132;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border-left:5px solid #198754;
+}
+
+</style>
+
+<h4 class="cat-title">Online Safety & Verification Tools</h4>
+<div class="row row-cols-5 g-4 text-center section-gap">
+
+
+    <div class="col">
+        <div class="card tool-card-sec p-3">
+            Phishing Link Detector
+            <a href="/tools/phishing-detector/" class="btn btn-success tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-sec p-3">
+            URL Safety Scanner
+            <a href="/tools/url-scanner/" class="btn btn-success tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-sec p-3">
+            Malware File Checker
+            <a href="/tools/malware-checker/" class="btn btn-success tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-sec p-3">
+            Email Header Analyzer
+            <a href="/tools/email-analyzer/" class="btn btn-success tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-sec p-3">
+            Fake Website Detector
+            <a href="/tools/fake-site-detector/" class="btn btn-success tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+</div>
+
+<style>
+
+/* Privacy purple theme */
+.tool-card-privacy{
+    height:110px;
+    border-radius:12px;
+    background:#f3e8ff;
+    color:#4b0082;
+    border-left:5px solid #6f42c1;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+/* purple button */
+.btn-purple{
+    background:#6f42c1;
+    color:white;
+}
+.btn-purple:hover{
+    background:#5a32a3;
+    color:white;
+}
+
+</style>
+
+
+<!-- ================= CATEGORY 3 ================= -->
+
+<h4 class="cat-title">🔎 Privacy & Tracking Tools</h4>
+
+<div class="row row-cols-5 g-4 text-center section-gap">
+
+    <div class="col">
+        <div class="card tool-card-privacy p-3">
+            IP Address Finder
+            <a href="/tools/ip-finder/" class="btn btn-purple tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-privacy p-3">
+            IP Location Tracker
+            <a href="/tools/ip-location/" class="btn btn-purple tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-privacy p-3">
+            Browser Info Checker
+           <a href="/tools/browser-info/" class="btn btn-purple tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-privacy p-3">
+            Device Info Checker
+            <a href="/tools/device-info/" class="btn btn-purple tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card tool-card-privacy p-3">
+            Cookies Viewer
+           <a href="/tools/cookies-viewer/" class="btn btn-purple tool-btn mt-2">Open</a>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

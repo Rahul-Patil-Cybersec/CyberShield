@@ -1,0 +1,85 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<div class="row">
+
+    <!-- LEFT LEARN -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4>🔐 Password Hash Generator</h4>
+
+            <p>
+                This tool converts your password into a secure
+                SHA-256 hash. Hashing protects passwords by hiding
+                the original text.
+            </p>
+
+            <h5>How it works?</h5>
+            <ul>
+                <li>Input text</li>
+                <li>System hashes it</li>
+                <li>Secure encrypted output</li>
+            </ul>
+
+            <h5>Input:</h5>
+            Text / Password
+
+            <h5>Output:</h5>
+            SHA256 Hash
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT TOOL -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4 class="mb-3">🛠 Tool Use</h4>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="text"
+                       name="text"
+                       placeholder="Enter text or password"
+                       class="form-control mb-3"
+                       required>
+
+                <button class="btn btn-primary w-100 mb-2">
+                    Generate Hash
+                </button>
+            </form>
+
+            {% if result %}
+                <div class="alert alert-success mt-3 text-break">
+                    {{ result }}
+                </div>
+            {% endif %}
+
+
+            <!-- SMALL BUTTONS -->
+            <div class="d-flex gap-2 mt-2">
+
+                <a href="" class="btn btn-secondary btn-sm flex-fill">
+                    Reset
+                </a>
+
+                <a href="/tools/" class="btn btn-outline-dark btn-sm flex-fill">
+                    ← Back
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

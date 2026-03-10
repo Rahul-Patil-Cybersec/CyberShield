@@ -1,0 +1,173 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* ===== HACKER THEME ===== */
+
+.hacker-text{
+    color:#00ff9f;
+}
+
+.hacker-bg{
+    background:#020b14;
+    border:1px solid #00ff9f;
+    color:#00ff9f;
+}
+
+/* textarea fix */
+.hacker-bg textarea,
+textarea.hacker-bg{
+    background:#020b14 !important;
+    color:#00ff9f !important;
+    border:1px solid #00ff9f !important;
+}
+
+textarea.hacker-bg::placeholder{
+    color:#00ff9f88;
+}
+
+/* remove white focus */
+textarea.hacker-bg:focus{
+    background:#020b14 !important;
+    color:#00ff9f !important;
+    box-shadow:0 0 8px #00ff9f;
+    border-color:#00ff9f;
+}
+
+.btn-row{
+    display:flex;
+    gap:12px;
+    margin-top:10px;
+}
+
+/* both buttons same size */
+.btn-hacker{
+    flex:1;
+    padding:10px;
+    font-weight:600;
+    border-radius:6px;
+    text-align:center;
+}
+.btn-save-note{
+    background:transparent;
+    border:1px solid #00ff9f;
+    color:#00ff9f;
+    font-weight:600;
+}
+
+.btn-save-note:hover{
+    background:#00ff9f;
+    color:black;
+}
+
+
+/* back button */
+.btn-back{
+    background:transparent;
+    border:1px solid #00ff9f;
+    color:#00ff9f;
+}
+
+.btn-back:hover{
+    background:#00ff9f;
+    color:black;
+}
+
+</style>
+
+
+<div class="row">
+
+<!-- LEFT -->
+<div class="col-md-6">
+
+<div class="card p-4 shadow hacker-bg">
+
+<h4 class="hacker-text">Secret Notepad Locker</h4>
+
+<p class="hacker-text">
+This tool allows secure storage of secret notes.
+Notes are stored safely in database.
+</p>
+
+<h5 class="hacker-text">How it works?</h5>
+
+<ul class="hacker-text">
+<li>User types note</li>
+<li>Note stored securely</li>
+<li>Only logged user access</li>
+</ul>
+
+<h5 class="hacker-text">Steps</h5>
+
+<ol class="hacker-text">
+<li>Enter note</li>
+<li>Click Save</li>
+<li>Note stored</li>
+</ol>
+
+<h5 class="hacker-text">Input / Output</h5>
+
+<div class="hacker-text">
+Input → Secret note<br>
+Output → Stored securely
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT -->
+<div class="col-md-6">
+
+<div class="card p-4 shadow hacker-bg">
+
+<h4 class="hacker-text">Secure Note</h4>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<textarea name="note"
+class="form-control hacker-bg mb-3"
+rows="6"
+placeholder="Enter secret note"></textarea>
+
+
+<!-- BUTTON ROW -->
+<div class="btn-row">
+
+<button class="btn btn-save-note w-100">
+Save Secure Note
+</button>
+
+
+
+<a href="/secret-zone/" class="btn-hacker btn-back">
+Back
+</a>
+
+</div>
+
+
+</form>
+
+
+{% if result %}
+
+<div class="mt-3 hacker-text">
+{{ result }}
+</div>
+
+{% endif %}
+
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

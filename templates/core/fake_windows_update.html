@@ -1,0 +1,143 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* centered container */
+.update-container{
+
+width:800px;
+margin:auto;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+
+}
+
+/* windows desktop */
+.desktop{
+
+background:url("https://wallpaperaccess.com/full/317501.jpg");
+background-size:cover;
+height:450px;
+position:relative;
+
+}
+
+/* update screen */
+.update-screen{
+
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#0078d7;
+color:white;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-size:22px;
+
+}
+
+/* progress circle */
+.circle{
+
+border:6px solid rgba(255,255,255,0.3);
+border-top:6px solid white;
+border-radius:50%;
+width:60px;
+height:60px;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+
+}
+
+@keyframes spin{
+
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+
+}
+
+</style>
+
+
+
+<div class="update-container">
+
+<div class="desktop">
+
+<div id="updateScreen" class="update-screen">
+
+<div class="circle"></div>
+
+<div id="updateText">
+Working on updates 0% complete
+</div>
+
+<div style="font-size:14px;margin-top:10px;">
+Don't turn off your computer
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<button onclick="startUpdate()"
+class="btn btn-primary">
+Start System Update
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+Back
+</a>
+
+</div>
+
+
+
+<script>
+
+let progress = 0;
+
+function startUpdate(){
+
+document.getElementById("updateScreen").style.display="flex";
+
+progress = 0;
+
+runUpdate();
+
+}
+
+function runUpdate(){
+
+let interval = setInterval(function(){
+
+progress++;
+
+document.getElementById("updateText").innerHTML =
+"Working on updates " + progress + "% complete";
+
+if(progress >= 100){
+
+progress = 0;
+
+}
+
+},100);
+
+}
+
+</script>
+
+{% endblock %}

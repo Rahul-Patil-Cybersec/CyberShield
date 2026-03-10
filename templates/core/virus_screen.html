@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Windows Security Alert</title>
+
+<style>
+
+body{
+
+background:black;
+color:#00ff00;
+font-family:consolas;
+margin:0;
+padding:20px;
+
+}
+
+.window{
+
+background:#0c0c0c;
+border:2px solid red;
+padding:20px;
+
+}
+
+.title{
+
+color:red;
+font-size:28px;
+
+}
+
+.progress{
+
+width:100%;
+background:#222;
+margin-top:20px;
+
+}
+
+.bar{
+
+height:20px;
+background:red;
+width:0%;
+
+}
+
+.btn{
+
+background:red;
+color:white;
+padding:10px;
+border:none;
+margin-top:20px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="window">
+
+<div class="title">
+
+⚠ WINDOWS DEFENDER ALERT
+
+</div>
+
+
+<p>
+
+Virus detected: Trojan.Win32.Injector
+
+</p>
+
+
+<p id="status">
+
+Initializing scan...
+
+</p>
+
+
+<div class="progress">
+
+<div class="bar" id="bar">
+
+</div>
+
+</div>
+
+
+<button class="btn" onclick="startScan()">
+
+Start Scan
+
+</button>
+
+
+<a href="/secret-zone/">
+
+<button class="btn">
+
+Exit
+
+</button>
+
+</a>
+
+</div>
+
+
+<script>
+
+let progress=0;
+
+function startScan(){
+
+let bar=document.getElementById("bar");
+
+let status=document.getElementById("status");
+
+let interval=setInterval(()=>{
+
+progress++;
+
+bar.style.width=progress+"%";
+
+status.innerText="Scanning system... "+progress+"%";
+
+if(progress>=100){
+
+status.innerText="System fully infected";
+
+clearInterval(interval);
+
+}
+
+},80);
+
+}
+
+</script>
+
+
+</body>
+
+</html>

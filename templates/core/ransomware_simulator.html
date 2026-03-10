@@ -1,0 +1,147 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* container */
+.ransom-container{
+
+width:850px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(0,0,0,0.7);
+
+}
+
+/* desktop */
+.desktop{
+
+background:url("https://wallpaperaccess.com/full/317501.jpg");
+background-size:cover;
+height:450px;
+position:relative;
+padding:20px;
+
+}
+
+/* files */
+.file{
+
+background:rgba(0,0,0,0.6);
+color:red;
+padding:8px;
+margin:5px;
+border-radius:5px;
+width:200px;
+
+}
+
+/* ransomware popup */
+.popup{
+
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:black;
+color:red;
+width:500px;
+padding:20px;
+border:2px solid red;
+display:none;
+
+}
+
+/* countdown */
+.timer{
+
+font-size:22px;
+
+}
+
+</style>
+
+
+
+<div class="ransom-container">
+
+<div class="desktop">
+
+<div class="file">documents.docx — LOCKED</div>
+<div class="file">photos.jpg — LOCKED</div>
+<div class="file">database.db — LOCKED</div>
+<div class="file">backup.zip — LOCKED</div>
+
+
+<div class="popup"
+id="popup">
+
+<h3>Your Files Are Encrypted!</h3>
+
+<p>
+All your files have been locked by ransomware.
+</p>
+
+<p>
+Pay 1 Bitcoin to recover files.
+</p>
+
+<p class="timer"
+id="timer">
+Time left: 300
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<button onclick="startRansom()"
+class="btn btn-danger">
+
+Open Suspicious File
+
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+
+Back
+
+</a>
+
+</div>
+
+
+
+<script>
+
+let time=300;
+
+function startRansom(){
+
+document.getElementById("popup")
+.style.display="block";
+
+setInterval(function(){
+
+time--;
+
+document.getElementById("timer")
+.innerText="Time left: "+time;
+
+if(time<=0)
+time=300;
+
+},1000);
+
+}
+
+</script>
+
+{% endblock %}

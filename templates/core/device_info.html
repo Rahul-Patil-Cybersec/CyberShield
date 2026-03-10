@@ -1,0 +1,92 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<style>
+
+/* purple button global */
+.btn-purple{
+    background-color:#6f42c1;
+    color:white;
+    border:none;
+}
+.btn-purple:hover{
+    background-color:#5a32a3;
+    color:white;
+}
+
+</style>
+
+
+<div class="row">
+
+    <!-- LEFT INFO -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4>💻 Device Info Checker</h4>
+
+            <p>
+                Detect your device type, operating system,
+                browser and IP address automatically.
+            </p>
+
+            <h5>How it works?</h5>
+            <ul>
+                <li>Reads request headers</li>
+                <li>Identifies device type</li>
+                <li>Shows system information</li>
+            </ul>
+
+            <h5>Steps:</h5>
+            <ol>
+                <li>Click Check Device</li>
+                <li>View details</li>
+            </ol>
+
+            <h5>Input / Output</h5>
+            <p>
+                Input → Button click<br>
+                Output → Device + Browser info
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT TOOL -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4 class="mb-3">🛠 Tool Use</h4>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <button class="btn btn-purple w-100 mb-3 text-white">
+                    Check Device Info
+                </button>
+            </form>
+
+            {% if result %}
+                <div class="alert alert-info text-center text-break">
+                    {{ result }}
+                </div>
+            {% endif %}
+
+            <div class="d-flex gap-2 mt-2">
+                <a href="" class="btn btn-secondary btn-sm flex-fill">Reset</a>
+                <a href="/tools/" class="btn btn-outline-dark btn-sm flex-fill">← Back</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

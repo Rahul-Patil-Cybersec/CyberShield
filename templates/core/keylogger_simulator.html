@@ -1,0 +1,150 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* container */
+.keylogger-container{
+
+width:800px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+
+}
+
+/* desktop */
+.desktop{
+
+background:url("https://wallpaperaccess.com/full/317501.jpg");
+background-size:cover;
+height:400px;
+position:relative;
+
+}
+
+/* log console */
+.console{
+
+background:black;
+color:#00ff9f;
+height:150px;
+font-family:monospace;
+padding:10px;
+overflow:auto;
+
+}
+
+/* keyboard */
+.keyboard{
+
+background:#202020;
+padding:10px;
+text-align:center;
+
+}
+
+.key{
+
+width:40px;
+height:40px;
+margin:4px;
+border:none;
+background:#0078d7;
+color:white;
+border-radius:4px;
+cursor:pointer;
+
+}
+
+.key:hover{
+
+background:#005a9e;
+
+}
+
+</style>
+
+
+
+<div class="keylogger-container">
+
+<div class="desktop">
+
+<div id="console"
+class="console">
+
+Keylogger initialized...
+
+</div>
+
+</div>
+
+
+<div class="keyboard"
+id="keyboard">
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+Back
+</a>
+
+</div>
+
+
+
+<script>
+
+/* virtual keys */
+let keys =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+/* create keyboard */
+let keyboard =
+document.getElementById("keyboard");
+
+let consoleBox =
+document.getElementById("console");
+
+keys.split("").forEach(function(k){
+
+let btn =
+document.createElement("button");
+
+btn.innerText = k;
+
+btn.className = "key";
+
+btn.onclick = function(){
+
+logKey(k);
+
+};
+
+keyboard.appendChild(btn);
+
+});
+
+
+/* log keystrokes */
+function logKey(key){
+
+consoleBox.innerHTML +=
+"<br>Captured keystroke: " + key;
+
+consoleBox.scrollTop =
+consoleBox.scrollHeight;
+
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* container */
+.matrix-container{
+
+width:900px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(0,0,0,0.7);
+position:relative;
+background:black;
+
+}
+
+/* matrix canvas */
+#matrix{
+
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+}
+
+/* terminal */
+.terminal{
+
+position:relative;
+color:#00ff9f;
+font-family:monospace;
+padding:20px;
+height:450px;
+overflow:auto;
+z-index:2;
+
+}
+
+/* title bar */
+.title-bar{
+
+background:#111;
+color:#00ff9f;
+padding:10px;
+font-weight:bold;
+
+}
+
+</style>
+
+
+
+<div class="matrix-container">
+
+<div class="title-bar">
+Matrix Hacker Terminal
+</div>
+
+<canvas id="matrix"></canvas>
+
+<div class="terminal" id="terminal">
+
+Initializing Matrix interface...
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-success">
+Back
+</a>
+
+</div>
+
+
+
+<script>
+
+/* MATRIX RAIN EFFECT */
+
+let canvas =
+document.getElementById("matrix");
+
+let ctx =
+canvas.getContext("2d");
+
+canvas.width = 900;
+canvas.height = 450;
+
+let letters =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*";
+
+letters = letters.split("");
+
+let fontSize = 14;
+
+let columns =
+canvas.width/fontSize;
+
+let drops = [];
+
+for(let i=0;i<columns;i++)
+drops[i]=1;
+
+function drawMatrix(){
+
+ctx.fillStyle =
+"rgba(0,0,0,0.05)";
+
+ctx.fillRect(0,0,
+canvas.width,
+canvas.height);
+
+ctx.fillStyle="#00ff9f";
+
+ctx.font =
+fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+
+let text =
+letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(
+text,
+i*fontSize,
+drops[i]*fontSize
+);
+
+if(drops[i]*fontSize >
+canvas.height &&
+Math.random()>0.975)
+
+drops[i]=0;
+
+drops[i]++;
+
+}
+
+}
+
+setInterval(drawMatrix,33);
+
+
+
+/* TERMINAL AUTO TYPING */
+
+let terminal =
+document.getElementById("terminal");
+
+let messages = [
+
+"Connecting to remote host...",
+"Bypassing firewall...",
+"Accessing secure database...",
+"Decrypting credentials...",
+"Scanning network ports...",
+"Injecting payload...",
+"Access granted.",
+"Downloading files...",
+"Cleaning traces...",
+"Operation complete."
+
+];
+
+let index=0;
+
+function typeMessage(){
+
+if(index>=messages.length)
+index=0;
+
+terminal.innerHTML +=
+"<br>> " +
+messages[index];
+
+terminal.scrollTop =
+terminal.scrollHeight;
+
+index++;
+
+}
+
+setInterval(typeMessage,1500);
+
+</script>
+
+{% endblock %}

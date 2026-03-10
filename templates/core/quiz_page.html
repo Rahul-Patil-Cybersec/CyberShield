@@ -1,0 +1,401 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* ===== IMPORT HACKER FONT ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+
+/* ===== HEADER ===== */
+
+.quiz-header{
+
+text-align:center;
+margin-bottom:40px;
+
+}
+
+.quiz-title{
+
+font-family:'Share Tech Mono', monospace;
+
+font-size:36px;
+
+color:#00ff9f;
+
+text-shadow:
+0 0 10px #00ff9f,
+0 0 20px rgba(0,255,159,0.5);
+
+}
+
+.quiz-tagline{
+
+color:#00f5ff;
+
+font-family:'Share Tech Mono', monospace;
+
+font-size:16px;
+
+margin-top:8px;
+
+opacity:0.8;
+
+}
+
+
+/* ===== QUESTION CARD ===== */
+
+.question-card{
+
+background:linear-gradient(
+145deg,
+#020617,
+#0f172a
+);
+
+border:1px solid rgba(0,255,159,0.3);
+
+border-radius:16px;
+
+padding:25px;
+
+margin-bottom:25px;
+
+transition:0.3s;
+
+}
+
+.question-card:hover{
+
+border-color:#00ff9f;
+
+box-shadow:
+0 0 15px rgba(0,255,159,0.3);
+
+}
+
+
+/* ===== QUESTION TEXT ===== */
+
+.question-text{
+
+color:#00ff9f;
+
+font-family:'Share Tech Mono', monospace;
+
+font-size:18px;
+
+margin-bottom:20px;
+
+}
+
+
+/* ===== OPTIONS GRID ===== */
+
+.options-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(180px,1fr));
+
+gap:12px;
+
+}
+
+
+/* ===== OPTION BUTTON ===== */
+
+.option{
+
+border:1px solid #00f5ff;
+
+border-radius:10px;
+
+padding:10px;
+
+text-align:center;
+
+cursor:pointer;
+
+color:#00f5ff;
+
+font-family:'Share Tech Mono', monospace;
+
+transition:0.3s;
+
+}
+
+.option:hover{
+
+background:#00f5ff;
+color:#020617;
+
+}
+
+input[type=radio]{
+
+display:none;
+
+}
+
+
+/* selected */
+
+input[type=radio]:checked + .option{
+
+background:#00ff9f;
+color:#020617;
+
+box-shadow:
+0 0 10px #00ff9f;
+
+}
+
+
+/* ===== BUTTONS ===== */
+
+.action-buttons{
+
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:30px;
+
+}
+
+.submit-btn{
+
+background:linear-gradient(
+45deg,
+#00ff9f,
+#00f5ff
+);
+
+border:none;
+
+padding:12px 30px;
+
+border-radius:10px;
+
+font-weight:bold;
+
+color:#020617;
+
+}
+
+.submit-btn:hover{
+
+box-shadow:
+0 0 15px #00ff9f;
+
+}
+
+.back-btn{
+
+border:1px solid #00f5ff;
+
+padding:12px 30px;
+
+border-radius:10px;
+
+color:#00f5ff;
+
+}
+
+.back-btn:hover{
+
+background:#00f5ff;
+color:#020617;
+
+}
+
+
+/* error message */
+
+.error-msg{
+
+color:red;
+text-align:center;
+margin-top:15px;
+display:none;
+
+}
+
+</style>
+
+
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="quiz-header">
+
+<div class="quiz-title">
+SECURITY QUIZ
+</div>
+
+<div class="quiz-tagline">
+[ Test Your Cyber Awareness • Strengthen Your Digital Defense ]
+</div>
+
+</div>
+
+
+<form method="POST"
+action="{% url 'quiz_result' %}"
+id="quizForm">
+
+{% csrf_token %}
+
+<input type="hidden"
+name="topic"
+value="{{ topic_id }}">
+<input type="hidden" name="score" id="scoreInput">
+<input type="hidden" name="total" id="totalInput" value="{{ questions|length }}">
+
+
+
+{% for q in questions %}
+
+<div class="question-card">
+
+<div class="question-text">
+Q{{ forloop.counter }}. {{ q.question }}
+</div>
+
+<div class="options-grid">
+
+<label>
+<input type="radio"
+name="{{ q.id }}"
+value="1"
+data-correct="{% if q.correct_answer == '1' %}true{% else %}false{% endif %}">
+<div class="option">
+{{ q.option1 }}
+</div>
+</label>
+
+<label>
+<input type="radio"
+name="{{ q.id }}"
+value="2"
+data-correct="{% if q.correct_answer == '2' %}true{% else %}false{% endif %}">
+<div class="option">
+{{ q.option2 }}
+</div>
+</label>
+
+<label>
+<input type="radio"
+name="{{ q.id }}"
+value="3"
+data-correct="{% if q.correct_answer == '3' %}true{% else %}false{% endif %}">
+<div class="option">
+{{ q.option3 }}
+</div>
+</label>
+
+<label>
+<input type="radio"
+name="{{ q.id }}"
+value="4"
+data-correct="{% if q.correct_answer == '4' %}true{% else %}false{% endif %}">
+<div class="option">
+{{ q.option4 }}
+</div>
+</label>
+
+
+</div>
+
+</div>
+
+{% endfor %}
+
+
+<div class="action-buttons">
+
+<button type="submit" class="submit-btn">
+SUBMIT QUIZ
+</button>
+
+<a href="{% url 'quiz_topics' %}" class="back-btn">
+BACK
+</a>
+
+</div>
+
+<div class="error-msg" id="errorMsg">
+⚠ Please answer all questions before submitting
+</div>
+
+</form>
+
+</div>
+
+
+
+<script>
+
+/* VALIDATION */
+
+document.getElementById("quizForm").addEventListener(
+"submit",
+function(e){
+
+let total =
+document.querySelectorAll(
+".question-card"
+).length;
+
+let answered =
+document.querySelectorAll(
+"input[type=radio]:checked"
+).length;
+
+if(answered < total){
+
+e.preventDefault();
+
+document.getElementById("errorMsg").style.display="block";
+
+window.scrollTo(0,0);
+
+}
+
+});
+
+
+document.getElementById("quizForm").addEventListener(
+"submit",
+function(e){
+
+let score = 0;
+
+let selected =
+document.querySelectorAll(
+'input[type=radio]:checked'
+);
+
+selected.forEach(function(option){
+
+if(option.dataset.correct === "true"){
+score++;
+}
+
+});
+
+document.getElementById("scoreInput").value = score;
+
+});
+
+
+</script>
+
+
+{% endblock %}

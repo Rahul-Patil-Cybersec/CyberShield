@@ -1,0 +1,74 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<div class="row">
+
+    <!-- LEFT INFO -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4>🌐 URL Safety Scanner</h4>
+
+            <p>
+                Scan website links to check whether they are safe,
+                suspicious or dangerous.
+            </p>
+
+            <h5>Checks:</h5>
+            <ul>
+                <li>HTTPS security</li>
+                <li>Shortened URLs</li>
+                <li>IP address usage</li>
+                <li>Length & keywords</li>
+            </ul>
+
+            <h5>Output:</h5>
+            Safe / Suspicious / Dangerous
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT TOOL -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4 class="mb-3">🛠 Tool Use</h4>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="text"
+                       name="url"
+                       placeholder="Enter website URL"
+                       class="form-control mb-3"
+                       required>
+
+                <button class="btn btn-success w-100 mb-2">
+                    Scan URL
+                </button>
+            </form>
+
+            {% if result %}
+                <div class="alert alert-info text-center mt-3">
+                    {{ result }}
+                </div>
+            {% endif %}
+
+            <div class="d-flex gap-2 mt-2">
+                <a href="" class="btn btn-secondary btn-sm flex-fill">Reset</a>
+                <a href="/tools/" class="btn btn-outline-dark btn-sm flex-fill">← Back</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* container */
+.spy-container{
+
+width:850px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(0,0,0,0.7);
+
+}
+
+/* win11 bar */
+.win-bar{
+
+background:#202020;
+color:white;
+padding:10px;
+font-size:14px;
+
+}
+
+/* desktop */
+.desktop{
+
+background:#0c0c0c;
+padding:15px;
+
+}
+
+/* camera grid */
+.camera-grid{
+
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+
+}
+
+/* camera feed */
+.camera{
+
+position:relative;
+background:black;
+height:200px;
+border:2px solid #00ff9f;
+overflow:hidden;
+
+}
+
+.camera video{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+/* camera label */
+.label{
+
+position:absolute;
+top:5px;
+left:5px;
+color:#00ff9f;
+font-size:12px;
+background:rgba(0,0,0,0.6);
+padding:3px;
+
+}
+
+/* tracking pointer */
+.tracker{
+
+position:absolute;
+width:40px;
+height:40px;
+border:2px solid red;
+pointer-events:none;
+
+}
+
+/* status */
+.status{
+
+color:#00ff9f;
+font-family:monospace;
+margin-top:10px;
+
+}
+
+</style>
+
+
+
+<div class="spy-container">
+
+<div class="win-bar">
+Windows 11 — Surveillance System
+</div>
+
+
+<div class="desktop">
+
+<div class="camera-grid">
+
+<div class="camera">
+<div class="label">Home Live</div>
+<video autoplay loop muted>
+<source src="https://www.w3schools.com/html/mov_bbb.mp4">
+</video>
+<div class="tracker" id="tracker1"></div>
+</div>
+
+
+<div class="camera">
+<div class="label">Office Live</div>
+<video autoplay loop muted>
+<source src="https://www.w3schools.com/html/movie.mp4">
+</video>
+<div class="tracker" id="tracker2"></div>
+</div>
+
+
+<div class="camera">
+<div class="label">Street Live</div>
+<video autoplay loop muted>
+<source src="https://www.w3schools.com/html/mov_bbb.mp4">
+</video>
+<div class="tracker" id="tracker3"></div>
+</div>
+
+
+</div>
+
+
+<div class="status" id="status">
+
+Tracking target...
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<button onclick="startTracking()"
+class="btn btn-danger">
+Start Surveillance
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+Back
+</a>
+
+</div>
+
+
+
+<script>
+
+function moveTracker(id){
+
+let tracker =
+document.getElementById(id);
+
+let x =
+Math.random()*150;
+
+let y =
+Math.random()*150;
+
+tracker.style.left = x+"px";
+tracker.style.top = y+"px";
+
+}
+
+
+function startTracking(){
+
+setInterval(function(){
+
+moveTracker("tracker1");
+moveTracker("tracker2");
+moveTracker("tracker3");
+
+},800);
+
+}
+
+</script>
+
+{% endblock %}

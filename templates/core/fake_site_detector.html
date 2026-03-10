@@ -1,0 +1,74 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<div class="row">
+
+    <!-- LEFT INFO -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4>🌐 Fake Website Detector</h4>
+
+            <p>
+                Detect fake or cloned websites that try to steal
+                passwords and financial information.
+            </p>
+
+            <h5>Checks:</h5>
+            <ul>
+                <li>HTTPS security</li>
+                <li>Suspicious words</li>
+                <li>Hyphens & numbers</li>
+                <li>Long URLs</li>
+            </ul>
+
+            <h5>Output:</h5>
+            Legit / Suspicious / Fake
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT TOOL -->
+    <div class="col-md-6">
+
+        <div class="card p-4 bg-white text-dark shadow">
+
+            <h4 class="mb-3">🛠 Tool Use</h4>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="text"
+                       name="url"
+                       placeholder="Enter website URL"
+                       class="form-control mb-3"
+                       required>
+
+                <button class="btn btn-success w-100 mb-2">
+                    Detect Website
+                </button>
+            </form>
+
+            {% if result %}
+                <div class="alert alert-info text-center mt-3">
+                    {{ result }}
+                </div>
+            {% endif %}
+
+            <div class="d-flex gap-2 mt-2">
+                <a href="" class="btn btn-secondary btn-sm flex-fill">Reset</a>
+                <a href="/tools/" class="btn btn-outline-dark btn-sm flex-fill">← Back</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

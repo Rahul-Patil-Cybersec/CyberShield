@@ -1,0 +1,179 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* container */
+.desktop-container{
+
+width:750px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+
+}
+
+/* win11 top bar */
+.win11-bar{
+
+background:#202020;
+color:white;
+padding:10px;
+font-size:14px;
+
+}
+
+/* desktop */
+.desktop{
+
+background:url("https://wallpaperaccess.com/full/1109069.jpg");
+background-size:cover;
+height:450px;
+padding:20px;
+position:relative;
+
+}
+
+/* icons */
+.icon{
+
+color:white;
+margin:10px;
+cursor:pointer;
+background:rgba(0,0,0,0.5);
+padding:8px;
+border-radius:6px;
+width:200px;
+
+}
+
+/* popup */
+.popup{
+
+position:absolute;
+width:250px;
+background:white;
+border-radius:6px;
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+padding:10px;
+z-index:1000;
+
+}
+
+.popup-title{
+
+background:#0078d7;
+color:white;
+padding:5px;
+
+}
+
+.popup-body{
+
+padding:10px;
+color:black;
+
+}
+
+</style>
+
+
+
+<div class="desktop-container">
+
+<div class="win11-bar">
+Windows 11 — Desktop
+</div>
+
+
+<div class="desktop" id="desktop">
+
+<div class="icon" onclick="openFile()">
+📄 Important_Document.exe
+</div>
+
+<div class="icon" onclick="openFile()">
+💻 Free_Software_Setup.exe
+</div>
+
+<div class="icon" onclick="openFile()">
+📁 Downloads Folder
+</div>
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<button class="btn btn-danger"
+onclick="openFile()">
+Open File
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+Back
+</a>
+
+</div>
+
+
+
+<script>
+
+let ads = [
+
+"Your PC is infected! Click to clean",
+"Install Free Antivirus Now",
+"You won a prize!",
+"Driver update required",
+"Your system is slow — Fix now"
+
+];
+
+
+function openFile(){
+
+createPopup();
+
+setTimeout(createPopup,800);
+
+setTimeout(createPopup,1500);
+
+}
+
+
+function createPopup(){
+
+let desktop = document.getElementById("desktop");
+
+let popup = document.createElement("div");
+
+popup.className="popup";
+
+popup.style.top=Math.random()*300+"px";
+
+popup.style.left=Math.random()*400+"px";
+
+popup.innerHTML=`
+
+<div class="popup-title">
+Advertisement
+</div>
+
+<div class="popup-body">
+${ads[Math.floor(Math.random()*ads.length)]}
+</div>
+
+`;
+
+desktop.appendChild(popup);
+
+}
+
+</script>
+
+{% endblock %}

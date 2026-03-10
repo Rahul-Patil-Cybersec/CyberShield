@@ -1,0 +1,173 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* container */
+.face-container{
+
+width:800px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+background:#111;
+color:#00ff9f;
+font-family:monospace;
+
+}
+
+/* win11 bar */
+.bar{
+
+background:#202020;
+padding:10px;
+
+}
+
+/* grid */
+.faces{
+
+display:flex;
+justify-content:space-around;
+padding:20px;
+
+}
+
+/* face icon */
+.face{
+
+text-align:center;
+cursor:pointer;
+
+}
+
+.face img{
+
+width:120px;
+border:2px solid #00ff9f;
+border-radius:10px;
+
+}
+
+/* scanner */
+.scanner{
+
+height:5px;
+background:#00ff9f;
+width:0;
+
+}
+
+/* result */
+.result{
+
+padding:20px;
+min-height:100px;
+
+}
+
+</style>
+
+
+
+<div class="face-container">
+
+<div class="bar">
+Face Recognition System
+</div>
+
+
+<div class="faces">
+
+<div class="face"
+onclick="scan('Male')">
+
+<img src="https://images.openai.com/static-rsc-3/wpNLfRLa_hziM8Ga074kk06XUikUCrIdXmhj8IqdjW9TGMKplo88JXmi0U2fSgYE7EheSve64O4yNGnCxQ1RSX0QpJGM_zL3r2Y5iyEu_uA?purpose=fullsize&v=1">
+
+<p>Male</p>
+
+</div>
+
+
+<div class="face"
+onclick="scan('Female')">
+
+<img src="https://images.openai.com/static-rsc-3/CtCppMadTznBHJW918ZaEgKMy-5WEbLZnT99ndLVjj75q7zBhq-gYfT6o2bQpCn-sA8nuJlf3TWzZ8GGT9hzDTEgbsn9O2V8-d4tcqIRQco?purpose=fullsize&v=1">
+
+<p>Female</p>
+
+</div>
+
+</div>
+
+
+<div class="scanner"
+id="scanner"></div>
+
+
+<div class="result"
+id="result">
+
+Awaiting scan...
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-success">
+
+Back
+
+</a>
+
+</div>
+
+
+
+<script>
+
+function scan(gender){
+
+let scanner=
+document.getElementById("scanner");
+
+let result=
+document.getElementById("result");
+
+scanner.style.width="0%";
+
+result.innerHTML="Scanning face...";
+
+let progress=0;
+
+let interval=setInterval(function(){
+
+progress+=5;
+
+scanner.style.width=progress+"%";
+
+if(progress>=100){
+
+clearInterval(interval);
+
+result.innerHTML=
+`
+Scan Complete<br>
+Gender Detected: ${gender}<br>
+Identity Confirmed<br>
+Access Granted
+`;
+
+}
+
+},100);
+
+}
+
+</script>
+
+{% endblock %}

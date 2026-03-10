@@ -1,0 +1,297 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<style>
+
+/* Container */
+.dashboard-container{
+    padding:40px;
+}
+
+
+/* Profile card */
+.profile-card{
+    background:#ffffff;
+    border-radius:12px;
+    padding:30px;
+    border:1px solid #e0e0e0;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+/* Avatar */
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    border:3px solid #00c853;
+}
+
+
+/* Username */
+.username{
+    font-size:22px;
+    font-weight:600;
+    color:#222;
+    margin-top:10px;
+}
+
+
+/* Security level */
+.security-level{
+    color:#00c853;
+    font-weight:500;
+    margin-top:5px;
+}
+
+
+/* Stars */
+.stars{
+    font-size:22px;
+    color:#ffc107;
+    margin-top:8px;
+}
+
+
+/* Stat card */
+.stat-card{
+    background:#ffffff;
+    border-radius:12px;
+    padding:20px;
+    border:1px solid #e0e0e0;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    text-align:center;
+    margin-bottom:20px;
+}
+
+
+/* Stat number */
+.stat-number{
+    font-size:26px;
+    font-weight:bold;
+    color:#00c853;
+}
+
+
+/* Stat label */
+.stat-label{
+    color:#555;
+    font-size:14px;
+}
+
+
+/* Hover */
+.stat-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.12);
+    transition:0.3s;
+}
+
+
+/* History list */
+.list-group-item{
+    border-radius:8px;
+    margin-bottom:6px;
+}
+
+</style>
+
+
+<div class="dashboard-container">
+
+<div class="row">
+
+<!-- LEFT PROFILE -->
+<div class="col-md-4">
+
+<div class="profile-card text-center">
+
+<img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+class="avatar">
+
+<div class="username">
+{{ user.username }}
+</div>
+
+<div class="security-level">
+Security Level: {{ security_level }}
+</div>
+
+<!-- DYNAMIC STARS -->
+<div class="stars">
+
+{% for i in "12345" %}
+        
+{% if forloop.counter <= stars %}
+★
+{% else %}
+☆
+{% endif %}
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT STATS -->
+<div class="col-md-8">
+
+<!-- FIRST ROW -->
+<div class="row">
+
+<div class="col-md-4">
+<div class="stat-card">
+
+<div class="stat-number">
+{{ total_tools }}
+</div>
+
+<div class="stat-label">
+Tools Used
+</div>
+
+</div>
+</div>
+
+
+<div class="col-md-4">
+<div class="stat-card">
+
+<div class="stat-number">
+{{ total_quiz }}
+</div>
+
+<div class="stat-label">
+Quiz Completed
+</div>
+
+</div>
+</div>
+
+
+<div class="col-md-4">
+<div class="stat-card">
+
+<div class="stat-number">
+{{ avg_score }}%
+</div>
+
+<div class="stat-label">
+Average Score
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+<!-- SECOND ROW -->
+<div class="row">
+
+<div class="col-md-6">
+<div class="stat-card">
+
+<div class="stat-number">
+{{ total_score }}
+</div>
+
+<div class="stat-label">
+Total Score
+</div>
+
+</div>
+</div>
+
+
+<div class="col-md-6">
+<div class="stat-card">
+
+<div class="stat-number">
+{{ security_level }}
+</div>
+
+<div class="stat-label">
+Security Rank
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+<!-- RECENT TOOL USAGE -->
+<hr>
+
+<h5>Recent Tool Usage</h5>
+
+<ul class="list-group mb-4">
+
+{% for tool in tool_history %}
+
+<li class="list-group-item">
+
+{{ tool.tool_name }}
+
+<span class="float-end text-muted">
+
+{{ tool.used_at|date:"d M Y H:i" }}
+
+</span>
+
+</li>
+
+{% empty %}
+
+<li class="list-group-item text-muted">
+No tool usage yet
+</li>
+
+{% endfor %}
+
+</ul>
+
+
+<!-- RECENT QUIZ RESULTS -->
+<h5>Recent Quiz Results</h5>
+
+<ul class="list-group">
+
+{% for quiz in quiz_history %}
+
+<li class="list-group-item">
+
+{{ quiz.topic }}
+
+<span class="float-end text-success">
+
+{{ quiz.score }}/{{ quiz.total }}
+
+</span>
+
+</li>
+
+{% empty %}
+
+<li class="list-group-item text-muted">
+No quiz attempted yet
+</li>
+
+{% endfor %}
+
+</ul>
+
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

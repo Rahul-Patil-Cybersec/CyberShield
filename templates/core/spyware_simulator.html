@@ -1,0 +1,171 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* main container */
+.spy-container{
+
+width:750px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+
+}
+
+/* win11 bar */
+.win11-bar{
+
+background:#202020;
+color:white;
+padding:10px;
+
+}
+
+/* desktop */
+.desktop{
+
+background:url("https://wallpaperaccess.com/full/1109069.jpg");
+background-size:cover;
+height:450px;
+position:relative;
+
+}
+
+/* activity console */
+.console{
+
+position:absolute;
+bottom:0;
+width:100%;
+height:150px;
+background:black;
+color:#00ff9f;
+font-family:monospace;
+padding:10px;
+overflow:auto;
+
+}
+
+/* spy indicator */
+.indicator{
+
+position:absolute;
+top:10px;
+right:10px;
+background:red;
+color:white;
+padding:5px;
+border-radius:4px;
+display:none;
+
+}
+
+/* blinking */
+.blink{
+
+animation:blink 1s infinite;
+
+}
+
+@keyframes blink{
+
+50%{opacity:0.3;}
+
+}
+
+</style>
+
+
+
+<div class="spy-container">
+
+<div class="win11-bar">
+Windows 11 — Desktop
+</div>
+
+
+<div class="desktop">
+
+<div id="spyIndicator"
+class="indicator blink">
+Spyware Active
+</div>
+
+
+<div id="console"
+class="console">
+System ready...
+</div>
+
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<button onclick="startSpyware()"
+class="btn btn-danger">
+Open Suspicious File
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+Back
+</a>
+
+</div>
+
+
+
+<script>
+
+let messages = [
+
+"Spyware installed successfully",
+"Collecting browser history...",
+"Accessing saved passwords...",
+"Recording keystrokes...",
+"Sending data to remote server...",
+"Uploading files...",
+"Transmission complete."
+
+];
+
+function startSpyware(){
+
+document.getElementById("spyIndicator").style.display="block";
+
+let consoleBox =
+document.getElementById("console");
+
+let index = 0;
+
+let interval =
+setInterval(function(){
+
+if(index >= messages.length){
+
+clearInterval(interval);
+
+return;
+
+}
+
+consoleBox.innerHTML +=
+"<br>" + messages[index];
+
+consoleBox.scrollTop =
+consoleBox.scrollHeight;
+
+index++;
+
+},1500);
+
+}
+
+</script>
+
+{% endblock %}

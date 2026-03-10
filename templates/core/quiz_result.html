@@ -1,0 +1,257 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+/* hacker font */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+.result-container{
+text-align:center;
+margin-top:60px;
+font-family:'Share Tech Mono', monospace;
+}
+
+/* TITLE */
+.result-title{
+font-size:34px;
+color:#00ff9f;
+text-shadow:
+0 0 10px #00ff9f,
+0 0 20px rgba(0,255,159,0.6);
+margin-bottom:30px;
+}
+
+/* circle */
+.circle{
+width:220px;
+height:220px;
+border-radius:50%;
+background:conic-gradient(
+#00ff9f 0deg,
+#020617 0deg
+);
+display:flex;
+align-items:center;
+justify-content:center;
+margin:auto;
+box-shadow:
+0 0 25px rgba(0,255,159,0.4);
+transition:0.2s;
+}
+
+/* inner circle */
+.circle-inner{
+width:170px;
+height:170px;
+background:#020617;
+border-radius:50%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+border:1px solid #00ff9f;
+}
+
+/* score */
+.score{
+font-size:32px;
+color:#00ff9f;
+}
+
+/* label */
+.score-label{
+color:#00f5ff;
+font-size:14px;
+}
+
+/* security level */
+.security{
+margin-top:20px;
+color:#00f5ff;
+font-size:20px;
+}
+
+/* stars */
+.star{
+color:#FFD700;
+text-shadow:
+0 0 5px #FFD700,
+0 0 10px #FFD700;
+}
+
+/* buttons */
+.btn-area{
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+/* check button */
+.check-btn{
+background:linear-gradient(
+45deg,
+#00ff9f,
+#00f5ff
+);
+border:none;
+padding:12px 30px;
+border-radius:10px;
+color:black;
+cursor:pointer;
+}
+
+/* topic button */
+.topic-btn{
+border:1px solid #00f5ff;
+padding:12px 30px;
+border-radius:10px;
+color:#00f5ff;
+text-decoration:none;
+display:inline-block;
+}
+
+.topic-btn:hover{
+background:#00f5ff;
+color:black;
+text-decoration:none;
+}
+
+</style>
+
+
+<div class="result-container">
+
+<div class="result-title">
+SECURITY ANALYSIS RESULT
+</div>
+
+<!-- circle -->
+<div class="circle" id="circle">
+
+<div class="circle-inner">
+
+<div class="score" id="score">
+0 / 100
+</div>
+
+<div class="score-label">
+SECURITY SCORE
+</div>
+
+</div>
+
+</div>
+
+<div class="security">
+Security Level: <b>{{ level }}</b>
+</div>
+
+<div id="stars" style="margin-top:10px;font-size:24px;"></div>
+
+<div class="btn-area">
+
+<button class="check-btn" id="checkBtn">CHECK RESULT</button>
+
+
+<a href="{% url 'quiz_topics' %}" class="topic-btn">
+QUIZ TOPICS
+</a>
+
+</div>
+
+</div>
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+let btn = document.getElementById("checkBtn");
+
+let circle = document.getElementById("circle");
+let scoreText = document.getElementById("score");
+let starsDiv = document.getElementById("stars");
+
+/* Django values FIX */
+let score = parseInt("{{ score|default:'0' }}") || 0;
+let total = parseInt("{{ total|default:'1' }}") || 1;
+
+let finalScore = Math.round((score / total) * 100);
+
+let current = 0;
+let running = false;
+
+
+/* update circle */
+function updateCircle(value){
+
+let degree = value * 3.6;
+
+circle.style.background =
+`conic-gradient(#00ff9f ${degree}deg, #020617 ${degree}deg)`;
+
+scoreText.innerHTML = value + " / 100";
+
+}
+
+
+/* show stars */
+function showStars(score){
+
+let starCount = Math.round(score / 20);
+
+let stars = "";
+
+for(let i=0;i<starCount;i++){
+stars += "<span class='star'>★</span>";
+}
+
+starsDiv.innerHTML = stars;
+
+}
+
+
+/* animation */
+function startAnimation(){
+
+if(running) return;
+
+running = true;
+
+let interval = setInterval(function(){
+
+if(current >= finalScore){
+
+clearInterval(interval);
+
+showStars(finalScore);
+
+}
+else{
+
+current++;
+
+updateCircle(current);
+
+}
+
+}, 20);
+
+}
+
+
+/* BUTTON CLICK EVENT */
+if(btn){
+
+btn.onclick = startAnimation;
+
+}
+
+});
+
+</script>
+
+
+
+
+{% endblock %}

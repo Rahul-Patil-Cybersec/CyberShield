@@ -1,0 +1,197 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+.typing-container{
+
+width:800px;
+margin:auto;
+background:black;
+color:#00ff9f;
+border-radius:10px;
+padding:20px;
+font-family:monospace;
+box-shadow:0 0 20px rgba(0,255,150,0.3);
+
+}
+
+.command-box{
+
+background:#111;
+padding:15px;
+margin-bottom:15px;
+border:1px solid #00ff9f;
+
+}
+
+.input-box{
+
+background:black;
+color:#00ff9f;
+border:1px solid #00ff9f;
+
+}
+
+.result{
+
+margin-top:10px;
+
+}
+
+.btn-hacker{
+
+background:#00ff9f;
+color:black;
+
+}
+
+.btn-hacker:hover{
+
+background:#00ffaa;
+
+}
+
+</style>
+
+
+
+<div class="typing-container">
+
+<h4>Hacker Typing Speed Test</h4>
+
+<div class="command-box"
+id="command">
+
+Initializing...
+
+</div>
+
+
+<input type="text"
+id="input"
+class="form-control input-box mb-3"
+placeholder="Type command here...">
+
+
+<div class="result">
+
+Speed: <span id="speed">0</span> WPM  
+Accuracy: <span id="accuracy">0</span>%
+
+</div>
+
+
+<div class="mt-3">
+
+<button onclick="startTest()"
+class="btn btn-hacker">
+Start Test
+</button>
+
+<button onclick="resetTest()"
+class="btn btn-outline-success">
+Reset
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+Back
+</a>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+let commands = [
+
+"nmap -sS 192.168.1.1",
+"ssh root@target",
+"whoami",
+"netstat -an",
+"dir /system32",
+"cat passwords.txt",
+"access granted"
+
+];
+
+let startTime;
+
+let currentCommand;
+
+
+
+function startTest(){
+
+currentCommand =
+commands[Math.floor(Math.random()*commands.length)];
+
+document.getElementById("command").innerHTML =
+currentCommand;
+
+startTime =
+new Date().getTime();
+
+}
+
+
+
+document.getElementById("input").addEventListener("input", function(){
+
+let typed =
+this.value;
+
+let now =
+new Date().getTime();
+
+let time =
+(now-startTime)/60000;
+
+let wpm =
+Math.round(
+typed.length/5/time
+);
+
+document.getElementById("speed").innerHTML =
+wpm || 0;
+
+
+let correct=0;
+
+for(let i=0;i<typed.length;i++){
+
+if(typed[i]==currentCommand[i])
+correct++;
+
+}
+
+let accuracy =
+Math.round(
+(correct/currentCommand.length)*100
+);
+
+document.getElementById("accuracy").innerHTML =
+accuracy || 0;
+
+});
+
+
+
+function resetTest(){
+
+document.getElementById("input").value="";
+document.getElementById("command").innerHTML=
+"Click Start Test";
+
+document.getElementById("speed").innerHTML="0";
+document.getElementById("accuracy").innerHTML="0";
+
+}
+
+</script>
+
+{% endblock %}

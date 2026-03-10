@@ -1,0 +1,207 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<style>
+
+/* ===== HACKER COLOR THEME ===== */
+
+.hacker-heading{
+    color:#00ff9f;
+    font-weight:700;
+}
+
+.hacker-text{
+    color:#00ff9f;
+}
+
+.hacker-btn{
+    background:#00ff9f;
+    color:black;
+    font-weight:600;
+    border:none;
+}
+
+.hacker-btn:hover{
+    background:#00ffa6;
+    color:black;
+}
+
+
+/* input box */
+.hacker-input{
+    background:black;
+    color:#00ff9f;
+    border:1px solid #00ff9f;
+}
+
+
+/* keyboard */
+.key{
+    width:42px;
+    height:42px;
+    margin:4px;
+    border:none;
+    background:#00ff9f;
+    color:black;
+    border-radius:6px;
+    font-weight:600;
+}
+
+.key:hover{
+    background:#00ffa6;
+}
+
+.keyboard-box{
+    margin-top:15px;
+}
+
+</style>
+
+
+
+<div class="row">
+
+<!-- ================= LEFT LEARN SECTION ================= -->
+
+<div class="col-md-6">
+
+<div class="card p-4 shadow bg-dark">
+
+<h4 class="hacker-heading">Virtual Secure Keyboard</h4>
+
+<p class="hacker-text">
+This tool provides an on-screen keyboard to securely enter sensitive data.
+It helps prevent keylogger attacks by allowing secure mouse-based typing.
+</p>
+
+
+<h5 class="hacker-heading mt-3">How it works?</h5>
+
+<ul class="hacker-text">
+<li>User clicks keys on virtual keyboard</li>
+<li>Characters appear in secure input box</li>
+<li>Data is safely processed and saved</li>
+</ul>
+
+
+<h5 class="hacker-heading mt-3">Steps to use</h5>
+
+<ol class="hacker-text">
+<li>Click keys using mouse</li>
+<li>Enter secure text</li>
+<li>Click Submit</li>
+</ol>
+
+
+<h5 class="hacker-heading mt-3">Input / Output</h5>
+
+<p class="hacker-text">
+Input → Mouse clicks<br>
+Output → Secure typed text saved
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= RIGHT TOOL SECTION ================= -->
+
+<div class="col-md-6">
+
+<div class="card p-4 shadow bg-dark">
+
+<h4 class="hacker-heading">Secure Input Tool</h4>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<input type="password"
+       id="secure_input"
+       name="secure_input"
+       class="form-control hacker-input mb-3"
+       readonly>
+
+
+<button class="btn hacker-btn w-100 mb-3">
+Submit Secure Input
+</button>
+
+</form>
+
+
+
+<!-- keyboard -->
+<div id="keyboard" class="keyboard-box"></div>
+
+
+
+{% if result %}
+
+<div class="mt-3 hacker-text">
+{{ result }}
+</div>
+
+{% endif %}
+
+
+<div class="d-flex gap-2 mt-3">
+
+<a href="" class="btn btn-secondary btn-sm flex-fill">
+Reset
+</a>
+
+<a href="{% url 'secret_zone' %}" class="btn btn-outline-light btn-sm flex-fill">
+Back
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= JAVASCRIPT KEYBOARD ================= -->
+
+<script>
+
+const keys =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+const keyboard =
+document.getElementById("keyboard");
+
+const input =
+document.getElementById("secure_input");
+
+keys.split("").forEach(k=>{
+
+let btn =
+document.createElement("button");
+
+btn.innerText = k;
+
+btn.type="button";
+
+btn.className="key";
+
+btn.onclick = ()=>{
+input.value += k;
+};
+
+keyboard.appendChild(btn);
+
+});
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+.virus-container{
+
+width:700px;
+margin:auto;
+background:#0c0c0c;
+border-radius:10px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+overflow:hidden;
+
+}
+
+/* fake windows title bar */
+.title-bar{
+
+background:#0078d7;
+color:white;
+padding:8px;
+font-size:14px;
+
+}
+
+.desktop{
+
+background:url("https://wallpaperaccess.com/full/317501.jpg");
+background-size:cover;
+height:400px;
+padding:20px;
+position:relative;
+
+}
+
+.file{
+
+background:rgba(0,0,0,0.6);
+color:#00ff9f;
+padding:6px;
+margin:4px;
+border-radius:4px;
+width:200px;
+
+}
+
+.infected{
+
+color:red;
+font-weight:bold;
+
+}
+
+.console{
+
+background:black;
+color:#00ff9f;
+padding:10px;
+font-family:monospace;
+height:150px;
+overflow:auto;
+
+}
+
+</style>
+
+
+
+<div class="virus-container">
+
+<div class="title-bar">
+Windows 10 — File Explorer
+</div>
+
+
+<div class="desktop" id="desktop">
+
+<div class="file" id="file1">documents.docx</div>
+<div class="file" id="file2">photos.jpg</div>
+<div class="file" id="file3">system32.dll</div>
+<div class="file" id="file4">backup.zip</div>
+<div class="file" id="file5">database.db</div>
+
+</div>
+
+
+<div class="console" id="console">
+Virus initializing...
+</div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<button onclick="startVirus()" class="btn btn-danger">
+Start Infection
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-light">
+Back
+</a>
+
+</div>
+
+
+
+<script>
+
+let files = [
+"file1","file2","file3","file4","file5"
+];
+
+let index = 0;
+
+function startVirus(){
+
+let consoleBox = document.getElementById("console");
+
+let interval = setInterval(function(){
+
+if(index >= files.length){
+
+consoleBox.innerHTML += "<br>Infection Complete.";
+clearInterval(interval);
+return;
+
+}
+
+let file = document.getElementById(files[index]);
+
+file.classList.add("infected");
+
+file.innerHTML += " — INFECTED";
+
+consoleBox.innerHTML += "<br>Infecting " + file.innerText;
+
+consoleBox.scrollTop = consoleBox.scrollHeight;
+
+index++;
+
+},1000);
+
+}
+
+</script>
+
+{% endblock %}

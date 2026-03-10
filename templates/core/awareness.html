@@ -1,0 +1,160 @@
+{% extends 'core/sidebar_base.html' %}
+
+{% block pagecontent %}
+
+<style>
+
+/* ===== HEADER ===== */
+
+.awareness-header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.awareness-header h2{
+color:#00eaff;
+font-weight:700;
+letter-spacing:1px;
+}
+
+.awareness-header p{
+color:#94a3b8;
+}
+
+/* ===== CARD ===== */
+
+.awareness-card{
+
+background:#0a0f1c;
+border:1px solid #00eaff;
+border-radius:12px;
+overflow:hidden;
+transition:0.3s;
+height:100%;
+position:relative;
+
+}
+
+/* HACKER GLOW HOVER */
+
+.awareness-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 0 10px #00eaff,
+0 0 20px #00eaff,
+0 0 40px rgba(0,234,255,0.5);
+
+border-color:#00ff9f;
+
+}
+
+/* IMAGE FIX — NO CUT */
+
+.awareness-card img{
+
+width:100%;
+height:auto;     /* IMPORTANT — no cut */
+max-height:220px;
+object-fit:contain;  /* show full image */
+background:black;
+padding:10px;
+
+}
+
+/* BODY */
+
+.awareness-body{
+padding:15px;
+}
+
+/* HACKER TEXT */
+
+.awareness-body h5{
+
+color:#00ff9f;
+font-weight:600;
+font-family:monospace;
+}
+
+.awareness-body p{
+
+color:#00eaff;
+font-family:monospace;
+font-size:14px;
+
+}
+
+/* optional scan line effect */
+.awareness-card::after{  
+
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(0,255,159,0.3),
+transparent
+);
+
+transition:0.5s;
+
+}
+
+.awareness-card:hover::after{
+
+left:100%;
+
+}
+
+
+</style>
+
+
+
+<div class="container-fluid">
+
+<div class="awareness-header">
+
+<h2>Cyber Security Awareness</h2>
+
+<p>Stay Alert. Stay Secure.</p>
+
+</div>
+
+
+
+<div class="row">
+
+{% for topic in topics %}
+
+<div class="col-md-4 mb-4">
+
+<div class="awareness-card">
+
+<img src="{{ topic.image.url }}">
+
+<div class="awareness-body">
+
+<h5>{{ topic.title }}</h5>
+
+<p>{{ topic.description }}</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

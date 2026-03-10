@@ -1,0 +1,106 @@
+{% extends 'core/sidebar_base.html' %}
+{% block pagecontent %}
+
+<style>
+
+.terminal-box{
+    background:black;
+    color:#00ff9f;
+    font-family:monospace;
+    padding:20px;
+    height:300px;
+    overflow:auto;
+    border:1px solid #00ff9f;
+}
+
+.terminal-input{
+    background:black;
+    color:#00ff9f;
+    border:1px solid #00ff9f;
+}
+
+.hacker-btn{
+    background:#00ff9f;
+    color:black;
+}
+
+.hacker-btn:hover{
+    background:#00ffaa;
+}
+
+</style>
+
+
+<div class="row">
+
+<!-- LEFT LEARN -->
+<div class="col-md-6">
+
+<div class="card p-4 shadow terminal-box">
+
+<h4>Hacker Terminal Simulator</h4>
+
+<p>
+Simulates real hacker terminal environment.
+Practice commands safely.
+</p>
+
+<ul>
+<li>help → show commands</li>
+<li>scan → scan network</li>
+<li>whoami → show user</li>
+<li>access → gain access</li>
+</ul>
+
+</div>
+
+</div>
+
+
+
+<!-- RIGHT TOOL -->
+<div class="col-md-6">
+
+<div class="card p-4 shadow">
+
+<div class="terminal-box mb-3">
+
+{% if output %}
+> {{ output }}
+{% else %}
+> system ready...
+{% endif %}
+
+</div>
+
+
+<form method="POST">
+
+{% csrf_token %}
+
+<input name="command"
+class="form-control terminal-input mb-3"
+placeholder="Enter command">
+
+<div class="d-flex gap-2">
+
+<button class="btn hacker-btn flex-fill">
+Run Command
+</button>
+
+<a href="{% url 'secret_zone' %}"
+class="btn btn-outline-success flex-fill">
+Back
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

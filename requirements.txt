@@ -3,3 +3,4 @@ asgiref==3.7.2
 sqlparse==0.4.4
 tzdata==2024.1
 gunicorn==25.1.0
+Pillow==11.2.1

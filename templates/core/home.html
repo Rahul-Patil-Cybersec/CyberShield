@@ -51,7 +51,7 @@ padding-right:80px;
 100%{ transform:translateX(-50%); }
 }
 
-/* SUB HEADING */
+/* ===== SUB HEADING ===== */
 .sub-heading{
 text-align:center;
 margin:80px 0 90px;
@@ -60,56 +60,65 @@ color:#00ffff;
 letter-spacing:1px;
 }
 
-/* CARDS */
+/* ===== CARDS ===== */
 .cards-section{
 display:flex;
 justify-content:center;
 align-items:flex-start;
-gap:60px;
+gap:70px;
 width:100%;
 margin:0 auto;
-padding-bottom:120px;
+padding-bottom:150px;
 flex-wrap:wrap;
 }
 
 .card{
-width:500px;
+width:550px;
 background:#0a1418;
 border-radius:18px;
 border:1px solid rgba(0,255,255,0.2);
 box-shadow:0 0 12px rgba(0,255,255,0.08);
 transition:all 0.4s ease;
+display:flex;
+flex-direction:column;
 overflow:hidden;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 20px rgba(0,255,100,0.6);
+transform:translateY(-12px);
+box-shadow:
+0 0 12px #00ff66,
+0 0 35px rgba(0,255,100,0.5);
 border:1px solid #00ff66;
 }
 
+/* IMAGE FIX */
 .card img{
 width:100%;
-height:260px;
+height:280px;
 object-fit:cover;
+display:block;
 }
 
 .card-body{
-padding:25px;
+padding:28px;
+text-align:left;
 }
 
 .card-body h4{
 color:#00ffff;
-margin-bottom:12px;
+margin-bottom:15px;
+font-size:20px;
 }
 
 .card-body p{
 color:#c9faff;
-font-size:17px;
-line-height:1.6;
+font-size:20px;
+line-height:1.7;
+margin-bottom:15px;
 }
 
-/* EXTRA CONTENT */
+/* EXPAND SECTION */
 .extra-content{
 max-height:0;
 overflow:hidden;
@@ -122,68 +131,81 @@ max-height:500px;
 
 /* BUTTON */
 .learn-btn{
-background:none;
+background:transparent;
 border:none;
 color:#00ffff;
-font-weight:bold;
+font-weight:600;
 cursor:pointer;
-margin-top:10px;
+padding:0;
+transition:0.3s;
 }
 
 .learn-btn:hover{
 color:#00ff66;
 }
 
-</style>
+/* RESPONSIVE */
+@media(max-width:1400px){
+.cards-section{
+flex-direction:column;
+align-items:center;
+}
+}
 
+</style>
 
 <!-- SLIDER -->
 <div class="scrolling-heading">
 <div class="scroll-track">
 
 <span>
-Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 •
+Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 • Power Your Digital Future 🚀 •
 </span>
 
 <span>
-Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 •
+Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 • Power Your Digital Future 🚀 •
 </span>
 
 </div>
 </div>
 
-
 <!-- SUB HEADING -->
 <div class="sub-heading">
-Enter the Cyber World 🌐 • Learn Cyber Security 🧠💻 • Test Yourself 🛡️ • Protect Your Data 🔐
+Enter the Cyber World 🌐 • Learn Cyber Security 🧠💻 • Test Yourself 🛡️ • Protect Your Data 🔐 • Secure the Future 🧑‍💻
 </div>
-
 
 <!-- CARDS -->
 <div class="cards-section">
 
-
 <!-- CARD 1 -->
 <div class="card">
 
-<img src="{% static 'images/R1.jpg' %}" alt="Cyber Security">
+<img src="{% static 'images/R1.jpg' %}" alt="Cyber Security Image">
 
 <div class="card-body">
 
 <h4>🔐 What is Cyber Security?</h4>
 
 <p>
-Protecting computers, networks and data from hackers and cyber threats.
+👉 Protecting the Digital World from Modern Threats. 🌐🛡️
 </p>
 
 <div class="extra-content">
 
 <p>
-Cyber Security protects systems from hacking, malware, ransomware and phishing attacks.
-It keeps online banking, shopping, and personal information safe.
+Cyber Security is the practice of protecting computers, servers, networks, applications, and data from digital attacks. 💻🌐<br><br>
+
+Today, almost everything is online — banking 🏦, shopping 🛒, communication 📱, education 🎓, and government services 🏛️.<br><br>
+
+In simple words, it means keeping your digital world safe from hackers, malware, phishing, ransomware, and data breaches. 🛡️<br><br>
+
+Protecting these systems from hacking and cyber threats such as cyber fraud 💳, unauthorized access data theft 📂, identity theft 👤, and malicious activities 🧑‍💻 is known as Cyber Security. 🔐✨
+
 </p>
 
 </div>
+
+<br>
 
 <button class="learn-btn" onclick="toggleCard(this)">
 Learn More
@@ -191,30 +213,40 @@ Learn More
 
 </div>
 </div>
-
-
 
 <!-- CARD 2 -->
+
 <div class="card">
 
-<img src="{% static 'images/R2.jpg' %}" alt="Cyber Attack">
+<img src="{% static 'images/R2.jpg' %}" alt="Cyber Attack Image">
 
 <div class="card-body">
 
-<h4>⚠️ Real-World Cyber Attacks</h4>
+<h4>⚠️Real-World Cyber Attacks 🌍</h4>
 
 <p>
-Understanding modern cyber threats helps prevent future attacks.
+Understanding Today’s Threats to Secure Tomorrow. 🔐✨
 </p>
 
 <div class="extra-content">
 
 <p>
-Cyber attacks like phishing, ransomware and data breaches cause huge financial damage.
-The famous WannaCry attack infected more than 200,000 computers worldwide.
+
+Real-World Cyber Attacks 🌍⚠️<br><br>
+
+Cyber attacks are rapidly increasing as technology grows. 💻🌐 Attackers target individuals, businesses, and governments to steal data, demand ransom, or disrupt services.<br><br>
+
+Examples include phishing 🎣, ransomware 🦠, data breaches 📂, and DoS attacks ⚡, leading to financial loss 💳 and reputational damage 📉.<br><br>
+
+A major case was the WannaCry attack (2017) 🦠, affecting 200,000+ systems worldwide with an estimated $4 billion loss 💰.<br><br>
+
+These incidents highlight the critical need for strong cyber security measures. 🔐🛡️
+
 </p>
 
 </div>
+
+<br>
 
 <button class="learn-btn" onclick="toggleCard(this)">
 Learn More
@@ -222,31 +254,42 @@ Learn More
 
 </div>
 </div>
-
-
 
 <!-- CARD 3 -->
+
 <div class="card">
 
-<img src="{% static 'images/R3.jpg' %}" alt="Developer">
+<img src="{% static 'images/R3.jpg' %}" alt="Developer Image">
 
 <div class="card-body">
 
-<h4>👨‍💻 Developer Information</h4>
+<h4>🧑Developer Information 👨‍💻</h4>
 
 <p>
-Developed by Rahul Patil <br>
-MCA Final Year Student
+Developed by : Rahul Patil <br>
+Program : Master of Computer Applications (MCA)
 </p>
+
+<br>
 
 <div class="extra-content">
 
 <p>
-Bhagwan Mahavir University <br>
-Cyber Security Final Year Project.
+Academic Year : 2024 – 2026
+</p>
+
+<p>
+
+Institution : Bhagwan Mahavir College of Management <br>
+University : Bhagwan Mahavir University 🏫<br><br>
+
+This project is developed as part of the final year MCA Cyber Security project. It helps people understand cyber threats and learn how to stay safe online. 🔐🛡️
+
 </p>
 
 </div>
+
+<br>
 
 <button class="learn-btn" onclick="toggleCard(this)">
 Learn More
@@ -255,10 +298,7 @@ Learn More
 </div>
 </div>
 
-
 </div>
-
-
 
 <script>
 

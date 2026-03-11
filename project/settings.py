@@ -5,14 +5,13 @@ Django settings for project project.
 from pathlib import Path
 import os
 
-# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY
-SECRET_KEY = 'django-insecure-s(97cztf9=@q^0cg^_6=k83_#e2_jt8@(lpn#m+4mjn6e4ou!d'
+SECRET_KEY = 'django-insecure-change-this-key'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -33,6 +32,10 @@ INSTALLED_APPS = [
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # Static files ke liye important
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,7 +53,10 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
+        # templates folder
         'DIRS': [BASE_DIR / 'templates'],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,27 +91,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
 ]
 
 
-# Internationalization
+# Language
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
-# STATIC FILES (CSS / JS)
-
+# STATIC FILES
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -114,12 +110,12 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # MEDIA FILES (Images)
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# Default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

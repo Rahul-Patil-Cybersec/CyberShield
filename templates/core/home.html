@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+
 {% block content %}
 
 <style>
@@ -50,7 +51,7 @@ padding-right:80px;
 100%{ transform:translateX(-50%); }
 }
 
-/* ===== SUB HEADING ===== */
+/* SUB HEADING */
 .sub-heading{
 text-align:center;
 margin:80px 0 90px;
@@ -59,62 +60,56 @@ color:#00ffff;
 letter-spacing:1px;
 }
 
-/* ===== CARDS ===== */
+/* CARDS */
 .cards-section{
 display:flex;
 justify-content:center;
 align-items:flex-start;
-gap:70px;
+gap:60px;
 width:100%;
 margin:0 auto;
-padding-bottom:150px;
+padding-bottom:120px;
+flex-wrap:wrap;
 }
 
 .card{
-width:550px;
+width:500px;
 background:#0a1418;
 border-radius:18px;
 border:1px solid rgba(0,255,255,0.2);
 box-shadow:0 0 12px rgba(0,255,255,0.08);
 transition:all 0.4s ease;
-display:flex;
-flex-direction:column;
 overflow:hidden;
 }
 
 .card:hover{
-transform:translateY(-12px);
-box-shadow:
-0 0 12px #00ff66,
-0 0 35px rgba(0,255,100,0.5);
+transform:translateY(-10px);
+box-shadow:0 0 20px rgba(0,255,100,0.6);
 border:1px solid #00ff66;
 }
 
 .card img{
 width:100%;
-height:280px;
+height:260px;
 object-fit:cover;
 }
 
 .card-body{
-padding:28px;
-text-align:left;
+padding:25px;
 }
 
 .card-body h4{
 color:#00ffff;
-margin-bottom:15px;
-font-size:20px;
+margin-bottom:12px;
 }
 
 .card-body p{
 color:#c9faff;
-font-size:20px;
-line-height:1.7;
-margin-bottom:15px;
+font-size:17px;
+line-height:1.6;
 }
 
-/* EXPAND SECTION */
+/* EXTRA CONTENT */
 .extra-content{
 max-height:0;
 overflow:hidden;
@@ -125,161 +120,163 @@ transition:max-height 0.5s ease;
 max-height:500px;
 }
 
-/* PROFESSIONAL BUTTON */
+/* BUTTON */
 .learn-btn{
-background:transparent;
+background:none;
 border:none;
 color:#00ffff;
-font-weight:600;
+font-weight:bold;
 cursor:pointer;
-padding:0;
-transition:0.3s;
+margin-top:10px;
 }
 
 .learn-btn:hover{
 color:#00ff66;
 }
 
-/* FOOTER */
-.footer{
-text-align:center;
-padding:40px 0;
-border-top:1px solid rgba(0,255,255,0.2);
-color:#00ffff;
-}
-
-/* RESPONSIVE */
-@media(max-width:1400px){
-.cards-section{
-flex-direction:column;
-align-items:center;
-}
-}
-
 </style>
+
 
 <!-- SLIDER -->
 <div class="scrolling-heading">
-    <div class="scroll-track">
-        <span>
-            Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 • Power Your Digital Future 🚀 •
-        </span>
-        <span>
-            Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 • Power Your Digital Future 🚀 •
-        </span>
-    </div>
+<div class="scroll-track">
+
+<span>
+Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 •
+</span>
+
+<span>
+Stay Safe in the Digital World 🔐🌐 • Protect Your Data 🛡️ • Stop Cyber Attacks ⚠️ • Secure Every Login 🔑 •
+</span>
+
 </div>
+</div>
+
 
 <!-- SUB HEADING -->
 <div class="sub-heading">
-Enter the Cyber World 🌐 • Learn Cyber Security 🧠💻 • Test Yourself 🛡️ • Protect Your Data 🔐 • Secure the Future 🧑‍💻
+Enter the Cyber World 🌐 • Learn Cyber Security 🧠💻 • Test Yourself 🛡️ • Protect Your Data 🔐
 </div>
+
 
 <!-- CARDS -->
 <div class="cards-section">
 
-    <!-- CARD 1 -->
-    <div class="card">
-        <img src="{% static 'images/R1.jpg' %}">
-        <div class="card-body">
-            <h4>🔐 What is Cyber Security?</h4>
-            <p>
-                👉 Protecting the Digital World from Modern Threats. 🌐🛡️
-            </p>
 
-            <div class="extra-content">
-                <p>
-                    Cyber Security is the practice of protecting computers, servers, networks, applications, and data from digital attacks. 💻🌐<br><br>
-                    Today, almost everything is online — banking 🏦, shopping 🛒, communication 📱, education 🎓, and government services 🏛️.<br><br>
-
-                    In simple words, it means keeping your digital world safe from hackers, malware, phishing, ransomware, and data breaches. 🛡️<br><br>
-
-                   
-                    Protecting these systems from hacking and cyber threats such as cyber fraud 💳, unauthorized access data theft 📂, identity theft 👤, and malicious activities 🧑‍💻 is known as Cyber Security. 🔐✨ <br><br>   </p>
-            </div>
-            <br>
-            <button class="learn-btn" onclick="toggleCard(this)">
-                Learn More
-            </button>
-        </div>
-    </div>
-
-    <!-- CARD 2 -->
-   
-
-    <!-- CARD 3 -->
-    <div class="card">
-        <img src="{% static 'images/R2.jpg' %}">
-        <div class="card-body">
-            <h4>⚠️Real-World Cyber Attacks 🌍</h4>
-            <p>
-               Understanding Today’s Threats to Secure Tomorrow. 🔐✨
-            </p>
-
-            <div class="extra-content">
-                <p>
-                    Real-World Cyber Attacks 🌍⚠️<br><br>
-
-Cyber attacks are rapidly increasing as technology grows. 💻🌐 Attackers target individuals, businesses, and governments to steal data, demand ransom, or disrupt services.<br><br>
-
-Examples include phishing 🎣, ransomware 🦠, data breaches 📂, and DoS attacks ⚡, leading to financial loss 💳 and reputational damage 📉.<br><br>
-
-A major case was the WannaCry attack (2017) 🦠, affecting 200,000+ systems worldwide with an estimated $4 billion loss 💰.<br><br>
-
-These incidents highlight the critical need for strong cyber security measures. 🔐🛡️<br><br>
-
-                </p>
-            </div>
-            <br>
-
-            <button class="learn-btn" onclick="toggleCard(this)">
-                Learn More
-            </button>
-        </div>
-    </div>
-
+<!-- CARD 1 -->
 <div class="card">
-        <img src="{% static 'images/R3.jpg' %}">
-        <div class="card-body">
-            <h4>🧑Developer Information 👨‍💻</h4>
-            <p>
-               Developed by : Rahul Patil   <br> Program : Master of Computer Applications (MCA)</p> <br> 
-           
 
-            <div class="extra-content">
-                <p> Academic Year : 2024 – 2026</p>
-                <p>
-                    Institution : Bhagwan Mahavir College of Management <br>
-                    University : Bhagwan Mahavir University 🏫<br> 
-                    <br><br>
-                   This project is developed as part of the final year MCA Cyber Security project. It helps people understand cyber threats and learn how to stay safe online. 🔐 🛡️<br><br>
+<img src="{% static 'images/R1.jpg' %}" alt="Cyber Security">
 
+<div class="card-body">
 
-                </p>
-            </div>
-            <br>
+<h4>🔐 What is Cyber Security?</h4>
 
-            <button class="learn-btn" onclick="toggleCard(this)">
-                Learn More
-            </button>
-        </div>
-    </div>
+<p>
+Protecting computers, networks and data from hackers and cyber threats.
+</p>
+
+<div class="extra-content">
+
+<p>
+Cyber Security protects systems from hacking, malware, ransomware and phishing attacks.
+It keeps online banking, shopping, and personal information safe.
+</p>
 
 </div>
 
+<button class="learn-btn" onclick="toggleCard(this)">
+Learn More
+</button>
+
+</div>
+</div>
+
+
+
+<!-- CARD 2 -->
+<div class="card">
+
+<img src="{% static 'images/R2.jpg' %}" alt="Cyber Attack">
+
+<div class="card-body">
+
+<h4>⚠️ Real-World Cyber Attacks</h4>
+
+<p>
+Understanding modern cyber threats helps prevent future attacks.
+</p>
+
+<div class="extra-content">
+
+<p>
+Cyber attacks like phishing, ransomware and data breaches cause huge financial damage.
+The famous WannaCry attack infected more than 200,000 computers worldwide.
+</p>
+
+</div>
+
+<button class="learn-btn" onclick="toggleCard(this)">
+Learn More
+</button>
+
+</div>
+</div>
+
+
+
+<!-- CARD 3 -->
+<div class="card">
+
+<img src="{% static 'images/R3.jpg' %}" alt="Developer">
+
+<div class="card-body">
+
+<h4>👨‍💻 Developer Information</h4>
+
+<p>
+Developed by Rahul Patil <br>
+MCA Final Year Student
+</p>
+
+<div class="extra-content">
+
+<p>
+Bhagwan Mahavir University <br>
+Cyber Security Final Year Project.
+</p>
+
+</div>
+
+<button class="learn-btn" onclick="toggleCard(this)">
+Learn More
+</button>
+
+</div>
+</div>
+
+
+</div>
+
+
+
 <script>
+
 function toggleCard(button){
-    const card = button.closest(".card");
 
-    card.classList.toggle("expanded");
+const card = button.closest(".card");
 
-    if(card.classList.contains("expanded")){
-        button.innerText = "Show Less";
-    } else {
-        button.innerText = "Learn More";
-    }
+card.classList.toggle("expanded");
+
+if(card.classList.contains("expanded")){
+button.innerText="Show Less";
 }
-</script>
+else{
+button.innerText="Learn More";
+}
 
+}
+
+</script>
 
 {% endblock %}

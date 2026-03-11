@@ -1,4 +1,5 @@
 {% extends 'core/sidebar_base.html' %}
+{% load static %}
 
 {% block pagecontent %}
 
@@ -55,9 +56,9 @@ border-color:#00ff9f;
 .awareness-card img{
 
 width:100%;
-height:auto;     /* IMPORTANT — no cut */
+height:auto;
 max-height:220px;
-object-fit:contain;  /* show full image */
+object-fit:contain;
 background:black;
 padding:10px;
 
@@ -112,9 +113,7 @@ left:100%;
 
 }
 
-
 </style>
-
 
 
 <div class="container-fluid">
@@ -128,7 +127,6 @@ left:100%;
 </div>
 
 
-
 <div class="row">
 
 {% for topic in topics %}
@@ -137,7 +135,8 @@ left:100%;
 
 <div class="awareness-card">
 
-<img src="{{ topic.image.url }}">
+<!-- IMAGE FIX -->
+<img src="{% static 'topics/' %}{{ topic.image }}">
 
 <div class="awareness-body">
 

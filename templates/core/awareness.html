@@ -136,7 +136,7 @@ left:100%;
 <div class="awareness-card">
 
 <!-- IMAGE FIX -->
-<img src="{% static 'topics/' %}{{ topic.image }}">
+<img src="{{ topic.image.url }}" alt="{{ topic.title }}">
 
 <div class="awareness-body">
 

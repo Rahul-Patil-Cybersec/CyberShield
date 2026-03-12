@@ -9,8 +9,6 @@ urlpatterns = [
     path('', include('core.urls')),
 ]
 
-# MEDIA FILES
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# STATIC FILES
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# MEDIA FILES (for uploaded images)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

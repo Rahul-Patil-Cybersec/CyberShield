@@ -25,7 +25,6 @@ color:#94a3b8;
 /* ===== CARD ===== */
 
 .awareness-card{
-
 background:#0a0f1c;
 border:1px solid #00eaff;
 border-radius:12px;
@@ -33,35 +32,23 @@ overflow:hidden;
 transition:0.3s;
 height:100%;
 position:relative;
-
 }
 
-/* HACKER GLOW HOVER */
-
 .awareness-card:hover{
-
 transform:translateY(-8px);
-
 box-shadow:
 0 0 10px #00eaff,
 0 0 20px #00eaff,
 0 0 40px rgba(0,234,255,0.5);
-
 border-color:#00ff9f;
-
 }
 
-/* IMAGE FIX — NO CUT */
+/* IMAGE */
 
 .awareness-card img{
-
 width:100%;
-height:auto;
-max-height:220px;
-object-fit:contain;
-background:black;
-padding:10px;
-
+height:200px;
+object-fit:cover;
 }
 
 /* BODY */
@@ -70,26 +57,21 @@ padding:10px;
 padding:15px;
 }
 
-/* HACKER TEXT */
-
 .awareness-body h5{
-
 color:#00ff9f;
 font-weight:600;
 font-family:monospace;
 }
 
 .awareness-body p{
-
 color:#00eaff;
 font-family:monospace;
 font-size:14px;
-
 }
 
-/* optional scan line effect */
-.awareness-card::after{  
+/* SCAN EFFECT */
 
+.awareness-card::after{  
 content:"";
 position:absolute;
 top:0;
@@ -102,15 +84,11 @@ transparent,
 rgba(0,255,159,0.3),
 transparent
 );
-
 transition:0.5s;
-
 }
 
 .awareness-card:hover::after{
-
 left:100%;
-
 }
 
 </style>
@@ -135,8 +113,13 @@ left:100%;
 
 <div class="awareness-card">
 
-<!-- IMAGE FIX -->
+<!-- IMAGE SAFE -->
+
+{% if topic.image %}
 <img src="{{ topic.image.url }}" alt="{{ topic.title }}">
+{% else %}
+<img src="{% static 'images/security.jpg' %}">
+{% endif %}
 
 <div class="awareness-body">
 
@@ -147,6 +130,14 @@ left:100%;
 </div>
 
 </div>
+
+</div>
+
+{% empty %}
+
+<div class="text-center text-info">
+
+<h4>No Awareness Topics Available</h4>
 
 </div>
 
